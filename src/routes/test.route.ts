@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
-import { sendResponse, successResponseBody } from '../utils/response.util'
+import { sendResponseBody, successResponseBody } from '../utils/response.util'
 const router = express.Router()
 
 router.get('/', (_req: Request, res: Response) => {
-  return sendResponse(res,
+  return sendResponseBody(res,
     successResponseBody('Success!', { name: 'Success!' })
   )
 })

@@ -1,4 +1,7 @@
-// This response body is based on JSend response (https://github.com/omniti-labs/jsend)
+/*
+  This response body structure is based on
+  JSend standard (https://github.com/omniti-labs/jsend)
+*/
 
 class ResponseBody {
   readonly status: string
@@ -12,4 +15,6 @@ class ResponseBody {
   }
 }
 
-export default ResponseBody
+export {
+  ResponseBody
+}

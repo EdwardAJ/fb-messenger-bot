@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import ResponseBody from '../models/response.model'
+import { ResponseBody } from '../models/response.model'
 
 import * as httpCode from '../constants/http/code.constant'
 import * as httpStatus from '../constants/http/status.constant'
@@ -19,12 +19,17 @@ function getHttpCode (body: ResponseBody) {
   return httpCode.ERROR_CODE
 }
 
-function sendResponse (res: Response, body: ResponseBody) {
+function sendResponseBody (res: Response, body: ResponseBody) {
   return res.status(getHttpCode(body)).send(body)
+}
+
+function sendStatusOnlyResponse (res: Response, statusCode: number) {
+  return res.status(statusCode).send()
 }
 
 export {
   successResponseBody,
   errorResponseBody,
-  sendResponse
+  sendResponseBody,
+  sendStatusOnlyResponse
 }
