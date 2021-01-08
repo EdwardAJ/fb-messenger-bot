@@ -1,0 +1,7 @@
+const SUCCESS_CODE = 200
+const ERROR_CODE = 400
+
+export {
+  SUCCESS_CODE,
+  ERROR_CODE
+}
