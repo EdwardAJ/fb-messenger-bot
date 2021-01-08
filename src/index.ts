@@ -1,11 +1,19 @@
+/* eslint-disable import/first */
+
+/*
+   Initialize the dotenv first.
+   There are several process.env needed to be called in webhook.route.ts
+*/
+
 import dotenv from 'dotenv'
+dotenv.config()
+
+/* After that, import necessary dependencies */
+
+import routes from './routes'
 import express from 'express'
 import cors from 'cors'
-import routes from './routes'
-
 import { DEFAULT_PORT } from './constants/port.constant'
-
-dotenv.config()
 
 const app = express()
 app.use(cors())

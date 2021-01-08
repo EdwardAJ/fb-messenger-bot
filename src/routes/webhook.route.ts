@@ -1,14 +1,10 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import { middleware } from '@line/bot-sdk'
 import { handleIncomingMessage } from '../controllers/webhook.controller'
-import { sendStatusOnlyResponse } from '../utils/response.util'
-import * as httpCode from '../constants/http/code.constant'
 
+import messengerConfig from '../utils/messenger-client/config.util'
 const router = express.Router()
 
-router.post('/', (req: Request, res: Response) => {
-  const { body } = req
-  handleIncomingMessage(body)
-  return sendStatusOnlyResponse(res, httpCode.SUCCESS_CODE)
-})
+router.post('/', middleware(messengerConfig), handleIncomingMessage)
 
 export default router
