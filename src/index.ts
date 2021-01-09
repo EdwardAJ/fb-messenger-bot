@@ -10,7 +10,6 @@ dotenv.config()
 /*
   After that, import necessary dependencies.
 */
-
 import express from 'express'
 const app = express()
 
