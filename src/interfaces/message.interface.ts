@@ -6,5 +6,5 @@ interface MessageInterface {
 }
 
 export {
-  MessageInterface,
+  MessageInterface
 }
