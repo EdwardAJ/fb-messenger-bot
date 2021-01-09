@@ -2,6 +2,9 @@
 The backend is currently deployed in https://warm-stream-38844.herokuapp.com/ . You can add 
 @287zmuyy in line as an official account.
 
+## Demo
+![](demo-video/demo-video.gif)
+
 ## How It Works
 1. The user initiates the conversation by sending a text message first to the bot.
 2. The bot will ask for the user's name. The user then replies with his/her name.
