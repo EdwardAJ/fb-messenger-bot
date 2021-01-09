@@ -15,7 +15,7 @@ async function onIncomingMessage (req: Request, res: Response): Promise<any> {
   const { body: { events } } = req
   const event = events[0]
 
-  if (event.type === EVENT_TYPE.MESSAGE) {
+  if (event?.type === EVENT_TYPE.MESSAGE) {
     if (event.source.type === SOURCE_TYPE.USER && event.message.type === MESSAGE_TYPE.TEXT) {
       const {
         timestamp,
