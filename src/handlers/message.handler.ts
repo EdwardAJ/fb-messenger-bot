@@ -4,8 +4,8 @@ import MessageModel from '../models/message.model'
 import { MessageInterface } from '../interfaces/message.interface'
 import { getMessageObject } from '../utils/message.util'
 
-async function addMessage (id: string, text: string, timestamp: string, userId: string): Promise<Document<any>> {
-  const messageObject: MessageInterface = getMessageObject(id, text, timestamp, userId)
+async function addMessage (id: string, text: string, timestampStr: string, userId: string): Promise<Document<any>> {
+  const messageObject: MessageInterface = getMessageObject(id, text, timestampStr, userId)
   return await new MessageModel(messageObject).save()
 }
 

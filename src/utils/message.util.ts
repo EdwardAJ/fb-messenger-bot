@@ -1,3 +1,4 @@
+import { TextMessage } from '@line/bot-sdk'
 import { MessageInterface } from '../interfaces/message.interface'
 
 function getMessageObject (id: string, text: string, timestampStr: string, userId: string): MessageInterface {
@@ -7,4 +8,11 @@ function getMessageObject (id: string, text: string, timestampStr: string, userI
   }
 }
 
-export { getMessageObject }
+function getReplyMessageObject (text: string): TextMessage {
+  return {
+    type: 'text',
+    text
+  }
+}
+
+export { getMessageObject, getReplyMessageObject }
