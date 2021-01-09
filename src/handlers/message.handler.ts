@@ -1,22 +1,26 @@
-import Message from '../models/message.model'
-import { MessageMap } from '../interfaces/message.interface'
+import { Document } from 'mongoose'
 
-const messageStore: MessageMap = {}
+import MessageModel from '../models/message.model'
+import { MessageInterface } from '../interfaces/message.interface'
+import { getMessageObject } from '../utils/message.util'
 
-function addMessage (id: string, text: string, userId: string, timestamp: string): void {
-  messageStore[id] = new Message(id, text, userId, timestamp)
+async function addMessage (id: string, text: string, timestamp: string, userId: string): Promise<Document<any>> {
+  const messageObject: MessageInterface = getMessageObject(id, text, timestamp, userId)
+  return await new MessageModel(messageObject).save()
 }
 
-function getAllMessages (): Message[] {
-  return Object.values(messageStore)
+async function getAllMessages (): Promise<Document<any>[]> {
+  const messages = await MessageModel.find()
+  return messages
 }
 
-function getMessageById (id: string): Message {
-  return messageStore[id]
+async function getMessageById (id: string): Promise<Document<any> | null> {
+  const message = await MessageModel.findOne({ id })
+  return message
 }
 
-function deleteMessageById (id: string): void {
-  delete messageStore[id]
+async function deleteMessageById (id: string): Promise<Document<any>> {
+  return await MessageModel.remove({ id })
 }
 
 export {

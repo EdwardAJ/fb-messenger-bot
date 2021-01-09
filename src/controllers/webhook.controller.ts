@@ -21,7 +21,12 @@ function onIncomingMessage (req: Request, res: Response): any {
         source: { userId }
       } = event
 
-      addMessage(id, text, timestamp, userId)
+      try {
+        addMessage(id, text, timestamp, userId)
+      } catch (error) {
+        sendStatusOnlyResponse(res, httpCode.INTERNAL_SERVER_ERROR_CODE)
+      }
+
       client.pushMessage(userId, {
         type: 'text',
         text: 'hello, world!'

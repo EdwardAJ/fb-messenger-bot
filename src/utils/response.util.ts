@@ -16,7 +16,7 @@ function getHttpCode (body: ResponseBody): number {
   if (body.status === httpStatus.SUCCESS_STATUS) {
     return httpCode.SUCCESS_CODE
   }
-  return httpCode.ERROR_CODE
+  return httpCode.BAD_REQUEST_CODE
 }
 
 function sendResponseBody (res: Response, body: ResponseBody): any {

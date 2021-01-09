@@ -1,9 +1,10 @@
-import Message from '../models/message.model'
-
-interface MessageMap {
-  [id: string]: Message
+interface MessageInterface {
+  id: string,
+  text: string,
+  timestamp: Date,
+  userId: string,
 }
 
 export {
-  MessageMap
+  MessageInterface
 }

@@ -1,16 +1,12 @@
-class Message {
-  id: string
-  text: string
-  userId: string
-  timestamp: string
+import { Schema, model } from 'mongoose'
+import { MESSAGE_MODEL_NAME } from '../constants/model.constant'
 
-  // Line messaging API returns timestamp as string
-  constructor (id: string, text: string, userId: string, timestamp: string) {
-    this.id = id
-    this.text = text
-    this.userId = userId
-    this.timestamp = timestamp
-  }
-}
+const schema = new Schema({
+  id: { type: String, required: true },
+  text: { type: String, required: true },
+  userId: { type: String, required: true },
+  timestamp: { type: Date, required: true }
+})
 
-export default Message
+const MessageModel = model(MESSAGE_MODEL_NAME, schema)
+export default MessageModel
