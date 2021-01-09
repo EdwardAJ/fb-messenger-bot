@@ -9,7 +9,7 @@ function successResponseBody (message: string, data ?: any): ResponseBody {
 }
 
 function errorResponseBody (message: string): ResponseBody {
-  return new ResponseBody(httpStatus.ERROR_STATUS, message, undefined)
+  return new ResponseBody(httpStatus.ERROR_STATUS, message)
 }
 
 function getHttpCode (body: ResponseBody): number {

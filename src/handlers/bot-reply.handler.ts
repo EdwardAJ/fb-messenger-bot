@@ -43,7 +43,7 @@ async function handleGreetingAndGetReply (userId: string): Promise<TextMessage> 
 
 async function handleUserNameAndGetReply (userId: string, name: string): Promise<TextMessage> {
   await setUserNameAndUpgradeState(userId, name)
-  return getReplyTextObject(REPLY.ASK_BIRTH_DATE)
+  return getReplyTextObject(`${name}, ${REPLY.ASK_BIRTH_DATE}`)
 }
 
 async function handleBirthDateAndGetReply (userId: string, birthDateStr: string): Promise<any> {

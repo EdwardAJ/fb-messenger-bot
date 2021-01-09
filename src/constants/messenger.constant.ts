@@ -20,7 +20,7 @@ const REPLY = {
   SAY_UNRECOGNIZED_DATE_FORMAT: 'Please use YYYY-MM-DD format!',
   ASK_REMAINING_DAYS: 'Do you want to know how many days left before your next birthday?',
   SAY_REMAINING_DAYS: 'days left until your next birthday',
-  SAY_GOODBYE: 'Goodbye and see you later!',
+  SAY_GOODBYE: 'Goodbye 👋',
   SAY_DONT_UNDERSTAND: 'Sorry, I don\'t understand!'
 }
 
