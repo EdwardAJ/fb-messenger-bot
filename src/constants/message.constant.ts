@@ -1,5 +1,6 @@
 const YES_RESPONSES = ['yes', 'yea', 'yup', 'yeah', 'y', 'ok']
 const NO_RESPONSES = ['no', 'nay', 'nope', 'nah']
+const QUICK_REPLY_LABELS = ['yes', 'no']
 
 const REPLY = {
   ASK_NAME: 'Hi, what\'s your name?',
@@ -14,5 +15,6 @@ const REPLY = {
 export {
   REPLY,
   YES_RESPONSES,
-  NO_RESPONSES
+  NO_RESPONSES,
+  QUICK_REPLY_LABELS
 }

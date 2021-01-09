@@ -6,12 +6,13 @@ import {
 } from './user.handler'
 
 import { USER_STATE } from '../constants/user.constant'
-import { REPLY, YES_RESPONSES, NO_RESPONSES } from '../constants/message.constant'
+import { REPLY, YES_RESPONSES, NO_RESPONSES, QUICK_REPLY_LABELS } from '../constants/message.constant'
 
 import {
   isDateValid, setCurrentYear, setNextYear, hasBirthdayPassed, getDaysToNextBirthDate
 } from '../utils/date.util'
-import { getReplyMessageObject } from '../utils/message.util'
+
+import { getReplyTextObject, getQuickReplyObject } from '../utils/message.util'
 
 async function handleMessageAndGetReply (userId: string, text: string): Promise<TextMessage> {
   const user = await getUserById(userId)
@@ -37,24 +38,24 @@ async function getReply (userId: string, text: string, state ?: string): Promise
 
 async function handleGreetingAndGetReply (userId: string): Promise<TextMessage> {
   await setGreetingsReceivedState(userId)
-  return getReplyMessageObject(REPLY.ASK_NAME)
+  return getReplyTextObject(REPLY.ASK_NAME)
 }
 
 async function handleUserNameAndGetReply (userId: string, name: string): Promise<TextMessage> {
   await setUserNameAndUpgradeState(userId, name)
-  return getReplyMessageObject(REPLY.ASK_BIRTH_DATE)
+  return getReplyTextObject(REPLY.ASK_BIRTH_DATE)
 }
 
-async function handleBirthDateAndGetReply (userId: string, birthDateStr: string): Promise<TextMessage> {
+async function handleBirthDateAndGetReply (userId: string, birthDateStr: string): Promise<any> {
   if (isDateValid(birthDateStr)) {
     try {
       await setBirthDateAndUpgradeState(userId, birthDateStr)
-      return getReplyMessageObject(REPLY.ASK_REMAINING_DAYS)
+      return getQuickReplyObject(REPLY.ASK_REMAINING_DAYS, QUICK_REPLY_LABELS)
     } catch (error) {
-      return getReplyMessageObject(REPLY.SAY_UNRECOGNIZED_DATE_FORMAT)
+      return getReplyTextObject(REPLY.SAY_UNRECOGNIZED_DATE_FORMAT)
     }
   }
-  return getReplyMessageObject(REPLY.SAY_UNRECOGNIZED_DATE_FORMAT)
+  return getReplyTextObject(REPLY.SAY_UNRECOGNIZED_DATE_FORMAT)
 }
 
 async function handleRemainingDaysAndGetReply (userId: string, userResponse: string): Promise<TextMessage> {
@@ -62,13 +63,13 @@ async function handleRemainingDaysAndGetReply (userId: string, userResponse: str
   if (YES_RESPONSES.includes(userResponse)) {
     await resetUserState(userId)
     const remainingDays = await getRemainingDays(userId)
-    return getReplyMessageObject(`There are ${remainingDays} ${REPLY.SAY_REMAINING_DAYS}`)
+    return getReplyTextObject(`There are ${remainingDays} ${REPLY.SAY_REMAINING_DAYS}`)
   }
   if (NO_RESPONSES.includes(userResponse)) {
     await resetUserState(userId)
-    return getReplyMessageObject(REPLY.SAY_GOODBYE)
+    return getReplyTextObject(REPLY.SAY_GOODBYE)
   }
-  return getReplyMessageObject(REPLY.SAY_DONT_UNDERSTAND)
+  return getReplyTextObject(REPLY.SAY_DONT_UNDERSTAND)
 }
 
 async function getRemainingDays (userId: string) {

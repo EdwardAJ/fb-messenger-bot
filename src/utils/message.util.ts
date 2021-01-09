@@ -1,4 +1,4 @@
-import { TextMessage } from '@line/bot-sdk'
+import { TextMessage, QuickReplyItem } from '@line/bot-sdk'
 import { MessageInterface } from '../interfaces/message.interface'
 
 function getMessageObject (id: string, text: string, timestampStr: string, userId: string): MessageInterface {
@@ -8,11 +8,33 @@ function getMessageObject (id: string, text: string, timestampStr: string, userI
   }
 }
 
-function getReplyMessageObject (text: string): TextMessage {
+function getReplyTextObject (text: string): TextMessage {
   return {
     type: 'text',
     text
   }
 }
 
-export { getMessageObject, getReplyMessageObject }
+function getQuickReplyObject (text: string, labels: string[]): TextMessage {
+  const quickReplyObject = getReplyTextObject(text)
+
+  const items: QuickReplyItem[] = []
+  labels.forEach((label) => {
+    items.push({
+      type: 'action',
+      action: {
+        type: 'message',
+        label,
+        text: label
+      }
+    })
+  })
+
+  quickReplyObject.quickReply = {
+    items
+  }
+
+  return quickReplyObject
+}
+
+export { getMessageObject, getReplyTextObject, getQuickReplyObject }
