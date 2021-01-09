@@ -25,7 +25,7 @@ async function onIncomingMessage (req: Request, res: Response): Promise<any> {
 
       try {
         addMessage(id, text, timestamp, userId)
-        const replyMessage: TextMessage = await handleMessageAndGetReply(text, userId)
+        const replyMessage: TextMessage = await handleMessageAndGetReply(userId, text)
         client.pushMessage(userId, replyMessage)
       } catch (error) {
         console.log(`Error happened when handling message: ${error}`)
