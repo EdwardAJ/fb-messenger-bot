@@ -5,7 +5,7 @@
 
 class ResponseBody {
   readonly status: string
-  readonly data ?: object
+  readonly data ?: any
   readonly message: string
 
   constructor (status: string, message: string, data ?: object) {

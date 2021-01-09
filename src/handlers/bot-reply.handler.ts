@@ -6,13 +6,13 @@ import {
 } from './user.handler'
 
 import { USER_STATE } from '../constants/user.constant'
-import { REPLY, YES_RESPONSES, NO_RESPONSES, QUICK_REPLY_LABELS } from '../constants/message.constant'
+import { REPLY, YES_RESPONSES, NO_RESPONSES, QUICK_REPLY_LABELS } from '../constants/messenger.constant'
 
 import {
   isDateValid, setCurrentYear, setNextYear, hasBirthdayPassed, getDaysToNextBirthDate
 } from '../utils/date.util'
 
-import { getReplyTextObject, getQuickReplyObject } from '../utils/message.util'
+import { getReplyTextObject, getQuickReplyObject } from '../utils/messenger.util'
 
 async function handleMessageAndGetReply (userId: string, text: string): Promise<TextMessage> {
   const user = await getUserById(userId)

@@ -4,7 +4,7 @@ import { ResponseBody } from '../models/response.model'
 import * as httpCode from '../constants/http/code.constant'
 import * as httpStatus from '../constants/http/status.constant'
 
-function successResponseBody (message: string, data: object): ResponseBody {
+function successResponseBody (message: string, data ?: any): ResponseBody {
   return new ResponseBody(httpStatus.SUCCESS_STATUS, message, data)
 }
 
@@ -19,11 +19,11 @@ function getHttpCode (body: ResponseBody): number {
   return httpCode.BAD_REQUEST_CODE
 }
 
-function sendResponseBody (res: Response, body: ResponseBody): any {
+function sendResponseBody (res: Response, body: ResponseBody): Response<ResponseBody> {
   return res.status(getHttpCode(body)).send(body)
 }
 
-function sendStatusOnlyResponse (res: Response, statusCode: number): any {
+function sendStatusOnlyResponse (res: Response, statusCode: number): Response<any> {
   return res.status(statusCode).send()
 }
 
