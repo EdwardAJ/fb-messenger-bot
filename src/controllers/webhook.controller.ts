@@ -3,7 +3,7 @@ import { TextMessage } from '@line/bot-sdk'
 import client from '../utils/messenger-client/client.util'
 import { sendStatusOnlyResponse } from '../utils/response.util'
 import { addMessage } from '../handlers/message.handler'
-import { handleMessageAndGetReply } from '../handlers/bot-reply.handler'
+import { receiveMessageAndReply } from '../handlers/messenger.handler'
 
 import {
   EVENT_TYPE, MESSAGE_TYPE,
@@ -25,7 +25,7 @@ async function onIncomingMessage (req: Request, res: Response): Promise<any> {
 
       try {
         addMessage(id, text, timestamp, userId)
-        const replyMessage: TextMessage = await handleMessageAndGetReply(userId, text)
+        const replyMessage: TextMessage = await receiveMessageAndReply(userId, text)
         client.pushMessage(userId, replyMessage)
       } catch (error) {
         console.log(`Error happened when handling message: ${error}`)
