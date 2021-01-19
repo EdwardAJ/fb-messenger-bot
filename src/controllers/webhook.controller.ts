@@ -4,6 +4,7 @@ import { addMessage } from '../handlers/message.handler'
 import { getReply } from '../handlers/messenger.handler'
 
 import { sendStatusOnlyResponse, sendChallengeResponse } from '../utils/response.util'
+import { replyMessage } from '../utils/messenger.util'
 
 import { QUERY, SUBSCRIBE_MODE } from '../constants/messenger.constant'
 import * as httpCode from '../constants/http/code.constant'
@@ -23,9 +24,11 @@ async function handleIncomingMessage (req: Request, res: Response): Promise<any>
         message: { mid, text }
       } = event
 
-      addMessage(mid, text, timestamp, id)
-      const reply = await getReply(id, text)
-      // TODO: make reply function
+      await addMessage(mid, text, timestamp, id)
+      const message = await getReply(id, text)
+      await replyMessage(message)
+
+      console.log(`Message successfully sent! `, message)
     }
   } catch (error) {
     console.log(`Error happened when handling message: ${error}`)

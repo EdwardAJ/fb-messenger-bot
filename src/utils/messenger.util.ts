@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import { ReplyInterface, QuickReplyItemInterface } from '../interfaces/messenger.interface'
 
 function getReplyTextObject (message: string, psId: string): ReplyInterface {
@@ -27,4 +29,9 @@ function getQuickReplyObject (message: string, psId: string, quickReplyMessages:
   return quickReplyObject
 }
 
-export { getReplyTextObject, getQuickReplyObject }
+async function replyMessage (reply: ReplyInterface) {
+  const sendUrl = `${process.env.GRAPH_BASE_URL}?access_token=${process.env.PAGE_ACCESS_TOKEN}`
+  await axios.post(sendUrl, reply)
+}
+
+export { getReplyTextObject, getQuickReplyObject, replyMessage }
