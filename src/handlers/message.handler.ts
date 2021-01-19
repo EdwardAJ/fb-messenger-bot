@@ -12,7 +12,7 @@ async function addMessage (id: string, text: string, timestampStr: string, userI
 
 async function getAllMessages (): Promise<Document<MessageInterface>[]> {
   // Order by timestamp desc
-  const messages = await MessageModel.find({}).sort({ 'timestamp': '-1' })
+  const messages = await MessageModel.find({}).sort({ timestamp: '-1' })
   return messages
 }
 

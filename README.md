@@ -1,6 +1,6 @@
 # Line Messenger Bot
-The backend is currently deployed in https://warm-stream-38844.herokuapp.com/ . You can add 
-@287zmuyy in line as an official account.
+The backend is currently deployed in https://mysterious-badlands-64487.herokuapp.com/ . You can visit the bot 
+here: https://www.facebook.com/Messenger-Bot-106137254801293
 
 ## Demo
 ![](demo-video/demo-video.gif)
@@ -24,11 +24,12 @@ Please install <b> Yarn </b>, <b> Node js </b>, and <b> Ngrok </b> to use this b
 3. Copy the `.env.example` file and rename it to `.env`. Then, assign all values needed in the `.env`
 4. Type and execute `yarn start` in your terminal
 5. The bot should be running on `http://localhost:PORT`. Use <b> Ngrok </b> to make it public.
-6. Copy the Ngrok URL (HTTPS), add `/webhook` to the URL, and paste it to <b> Line Developers Console in Webhook Settings. </b>. For example, if the bot is running on `https://184af9aeda9c.ngrok.io`, then the pasted URL in Console should be `https://184af9aeda9c.ngrok.io/webhook`.
-7. Click verify button in Line Developers Console and your Line bot should be set up
+6. Copy the Ngrok URL (HTTPS), add `/webhook` to the URL, and paste it to <b> Webhooks Settings. </b>. For example, if the bot is running on `https://184af9aeda9c.ngrok.io`, then the pasted URL should be `https://184af9aeda9c.ngrok.io/webhook`.
+7. Copy the verify token (random string provided by yourself), then paste it to <b> Webhooks Settings. </b>
 
 ## Endpoints
-1. [POST] `/webhook`: Webhook endpoint needed by Line Messaging API.
-2. [GET] `/messages`: Get all messages received by the bot.
-3. [GET] `/messages/:id`: Get a message by its id.
-4. [DELETE] `/messages/:id`: Delete a message by its id.
+1. [POST] `/webhook`: Webhook endpoint where messages are being received and handled.
+2. [GET] `/webhook`: Webhook endpoint to verify challenge provided by Messenger.
+3. [GET] `/messages`: Get all messages received by the bot (sorted by newest to lowest message).
+4. [GET] `/messages/:id`: Get a message by its id.
+5. [DELETE] `/messages/:id`: Delete a message by its id.
