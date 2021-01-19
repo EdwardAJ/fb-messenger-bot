@@ -5,7 +5,7 @@ import { UserInterface } from '../interfaces/user.interface'
 import { getUserObject } from '../utils/user.util'
 import { USER_STATE } from '../constants/user.constant'
 
-async function setGreetingsReceivedState (id: string, state: string = USER_STATE.GREETINGS_RECEIVED): Promise<Document<any>> {
+async function setGreetingsReceivedState (id: string, state: string = USER_STATE.GREETINGS_RETRIEVED): Promise<Document<any>> {
   const userObject: UserInterface = getUserObject(id, state)
   return await UserModel.findOneAndUpdate({ id }, userObject, { upsert: true })
 }

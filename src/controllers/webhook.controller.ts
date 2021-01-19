@@ -16,7 +16,6 @@ async function handleIncomingMessage (req: Request, res: Response): Promise<any>
     for (const entry of body.entry) {
       // Fetch first message (hence the index is 0)
       const event = entry.messaging[0]
-      console.log(event)
 
       const {
         sender: { id },

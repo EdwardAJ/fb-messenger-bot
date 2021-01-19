@@ -27,6 +27,7 @@ async function main () {
 
     app.use(morgan('dev'))
     app.use(cors())
+    app.use(express.json())
     app.use(routes)
 
     const PORT = process.env.PORT || DEFAULT_PORT
