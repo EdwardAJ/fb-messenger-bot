@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 interface QuickReplyItemInterface {
   content_type: string,
   title: string,

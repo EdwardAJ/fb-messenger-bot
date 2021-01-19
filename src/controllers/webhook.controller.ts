@@ -17,7 +17,7 @@ async function handleIncomingMessage (req: Request, res: Response): Promise<any>
       // Fetch first message (hence the index is 0)
       const event = entry.messaging[0]
       console.log(event)
-  
+
       const {
         sender: { id },
         timestamp,
@@ -28,7 +28,7 @@ async function handleIncomingMessage (req: Request, res: Response): Promise<any>
       const message = await getReply(id, text)
       await replyMessage(message)
 
-      console.log(`Message successfully sent! `, message)
+      console.log('Message successfully sent! ', message)
     }
   } catch (error) {
     console.log(`Error happened when handling message: ${error}`)
@@ -49,7 +49,7 @@ async function handleMessengerVerification (req: Request, res: Response): Promis
     if (mode === SUBSCRIBE_MODE && token === process.env.VERIFY_TOKEN) {
       return sendChallengeResponse(res, httpCode.SUCCESS_CODE, challenge)
     }
-    return sendStatusOnlyResponse(res, httpCode.FORBIDDEN_CODE)      
+    return sendStatusOnlyResponse(res, httpCode.FORBIDDEN_CODE)
   }
   return sendStatusOnlyResponse(res, httpCode.BAD_REQUEST_CODE)
 }

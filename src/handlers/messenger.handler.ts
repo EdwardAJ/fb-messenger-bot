@@ -13,7 +13,6 @@ import {
 } from '../utils/date.util'
 import { getReplyTextObject, getQuickReplyObject } from '../utils/messenger.util'
 
-
 async function getReply (userId: string, text: string): Promise<ReplyInterface> {
   const user = await getUserById(userId)
   const state = (user as any)?.state
@@ -58,7 +57,7 @@ async function receiveBirthDateAndAskQuickReply (userId: string, birthDateStr: s
 
 async function receiveBinaryResponseAndReply (userId: string, userBinaryResponse: string): Promise<ReplyInterface> {
   userBinaryResponse = userBinaryResponse.toLowerCase()
-  
+
   // Reply with remaining days (user response = yes)
   if (YES_RESPONSES.includes(userBinaryResponse)) {
     await resetUserState(userId)
