@@ -10,6 +10,14 @@ const SOURCE_TYPE = {
   USER: 'user'
 }
 
+const QUERY = {
+  MODE: 'hub.mode',
+  TOKEN: 'hub.verify_token',
+  CHALLENGE: 'hub.challenge'
+}
+
+const SUBSCRIBE_MODE = 'subscribe'
+
 const YES_RESPONSES = ['yes', 'yea', 'yup', 'yeah', 'y', 'ok']
 const NO_RESPONSES = ['no', 'nay', 'nope', 'nah']
 const QUICK_REPLY_LABELS = ['yes', 'no']
@@ -31,5 +39,7 @@ export {
   QUICK_REPLY_LABELS,
   EVENT_TYPE,
   MESSAGE_TYPE,
-  SOURCE_TYPE
+  SOURCE_TYPE,
+  QUERY,
+  SUBSCRIBE_MODE,
 }

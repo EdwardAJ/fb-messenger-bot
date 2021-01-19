@@ -11,8 +11,8 @@ import { REPLY, YES_RESPONSES, NO_RESPONSES, QUICK_REPLY_LABELS } from '../const
 import {
   isDateValid, setCurrentYear, setNextYear, hasBirthdayPassed, getDaysToNextBirthDate
 } from '../utils/date.util'
-
 import { getReplyTextObject, getQuickReplyObject } from '../utils/messenger.util'
+
 
 async function receiveMessageAndReply (userId: string, text: string): Promise<TextMessage> {
   const user = await getUserById(userId)

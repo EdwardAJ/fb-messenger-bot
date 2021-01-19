@@ -27,9 +27,14 @@ function sendStatusOnlyResponse (res: Response, statusCode: number): Response<an
   return res.status(statusCode).send()
 }
 
+function sendChallengeResponse (res: Response, statusCode: number, challenge: any): Response<any> {
+  return res.status(statusCode).send(challenge)
+}
+
 export {
   successResponseBody,
   errorResponseBody,
   sendResponseBody,
-  sendStatusOnlyResponse
+  sendStatusOnlyResponse,
+  sendChallengeResponse
 }
