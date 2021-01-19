@@ -1,15 +1,3 @@
-const EVENT_TYPE = {
-  MESSAGE: 'message'
-}
-
-const MESSAGE_TYPE = {
-  TEXT: 'text'
-}
-
-const SOURCE_TYPE = {
-  USER: 'user'
-}
-
 const QUERY = {
   MODE: 'hub.mode',
   TOKEN: 'hub.verify_token',
@@ -20,7 +8,7 @@ const SUBSCRIBE_MODE = 'subscribe'
 
 const YES_RESPONSES = ['yes', 'yea', 'yup', 'yeah', 'y', 'ok']
 const NO_RESPONSES = ['no', 'nay', 'nope', 'nah']
-const QUICK_REPLY_LABELS = ['yes', 'no']
+const QUICK_REPLY_MESSAGES = ['yes', 'no']
 
 const REPLY = {
   ASK_NAME: 'Hi, what\'s your name?',
@@ -36,10 +24,7 @@ export {
   REPLY,
   YES_RESPONSES,
   NO_RESPONSES,
-  QUICK_REPLY_LABELS,
-  EVENT_TYPE,
-  MESSAGE_TYPE,
-  SOURCE_TYPE,
+  QUICK_REPLY_MESSAGES,
   QUERY,
   SUBSCRIBE_MODE,
 }

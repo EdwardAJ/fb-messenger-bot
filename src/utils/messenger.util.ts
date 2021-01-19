@@ -1,31 +1,29 @@
-import { TextMessage, QuickReplyItem } from '@line/bot-sdk'
+import { ReplyInterface, QuickReplyItemInterface } from '../interfaces/messenger.interface'
 
-function getReplyTextObject (text: string): TextMessage {
+function getReplyTextObject (message: string, psId: string): ReplyInterface {
   return {
-    type: 'text',
-    text
+    recipient: {
+      id: psId
+    },
+    message: {
+      text: message
+    }
   }
 }
 
-function getQuickReplyObject (text: string, labels: string[]): TextMessage {
-  const quickReplyObject = getReplyTextObject(text)
+function getQuickReplyObject (message: string, psId: string, quickReplyMessages: string[]): ReplyInterface {
+  const quickReplyObject = getReplyTextObject(message, psId)
+  const quickReplyItems : QuickReplyItemInterface[] = []
 
-  const items: QuickReplyItem[] = []
-  labels.forEach((label) => {
-    items.push({
-      type: 'action',
-      action: {
-        type: 'message',
-        label,
-        text: label
-      }
+  quickReplyMessages.forEach((message) => {
+    quickReplyItems.push({
+      content_type: 'text',
+      title: message,
+      payload: message
     })
   })
 
-  quickReplyObject.quickReply = {
-    items
-  }
-
+  quickReplyObject.message.quick_replies = quickReplyItems
   return quickReplyObject
 }
 

@@ -10,7 +10,6 @@
     "test": "mocha -r ts-node/register src/tests/**/*.test.ts"
   },
   "dependencies": {
-    "@line/bot-sdk": "^7.2.0",
     "@types/chai": "^4.2.14",
     "@types/cors": "^2.8.9",
     "@types/dotenv": "^8.2.0",

@@ -1,39 +1,35 @@
 import { Request, Response } from 'express'
-import { TextMessage } from '@line/bot-sdk'
 
 import { addMessage } from '../handlers/message.handler'
-import { receiveMessageAndReply } from '../handlers/messenger.handler'
+import { getReply } from '../handlers/messenger.handler'
 
-import client from '../utils/messenger-client/client.util'
 import { sendStatusOnlyResponse, sendChallengeResponse } from '../utils/response.util'
 
-import {
-  EVENT_TYPE, MESSAGE_TYPE,
-  SOURCE_TYPE, QUERY, SUBSCRIBE_MODE
-} from '../constants/messenger.constant'
+import { QUERY, SUBSCRIBE_MODE } from '../constants/messenger.constant'
 import * as httpCode from '../constants/http/code.constant'
 
 async function handleIncomingMessage (req: Request, res: Response): Promise<any> {
-  const { body: { events } } = req
-  const event = events[0]
+  const { body } = req
 
-  if (event?.type === EVENT_TYPE.MESSAGE) {
-    if (event.source.type === SOURCE_TYPE.USER && event.message.type === MESSAGE_TYPE.TEXT) {
+  try {
+    for (const entry of body.entry) {
+      // Fetch first message (hence the index is 0)
+      const event = entry.messaging[0]
+      console.log(event)
+  
       const {
+        sender: { id },
         timestamp,
-        message: { id, text },
-        source: { userId }
+        message: { mid, text }
       } = event
 
-      try {
-        addMessage(id, text, timestamp, userId)
-        const replyMessage: TextMessage = await receiveMessageAndReply(userId, text)
-        client.pushMessage(userId, replyMessage)
-      } catch (error) {
-        console.log(`Error happened when handling message: ${error}`)
-        return sendStatusOnlyResponse(res, httpCode.INTERNAL_SERVER_ERROR_CODE)
-      }
+      addMessage(mid, text, timestamp, id)
+      const reply = await getReply(id, text)
+      // TODO: make reply function
     }
+  } catch (error) {
+    console.log(`Error happened when handling message: ${error}`)
+    return sendStatusOnlyResponse(res, httpCode.INTERNAL_SERVER_ERROR_CODE)
   }
 
   return sendStatusOnlyResponse(res, httpCode.SUCCESS_CODE)
